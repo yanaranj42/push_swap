@@ -6,7 +6,7 @@
 /*   By: yanaranj <yanaranj@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:35:01 by yanaranj          #+#    #+#             */
-/*   Updated: 2024/02/12 15:54:05 by yanaranj         ###   ########.fr       */
+/*   Updated: 2024/02/22 13:49:47 by yanaranj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 
 int	ft_isdigit(int c)
 {
-	if (c >= 48 && c <= 57)
+	if (c >= '0' && c <= '9')
 		return (1);
 	else
 		return (0);
@@ -72,4 +72,3 @@ int	ft_atoi(const char *str)
 	}
 	return (nbr * flag);
 }
-

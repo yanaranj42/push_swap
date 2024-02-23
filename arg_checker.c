@@ -6,7 +6,7 @@
 /*   By: yanaranj <yanaranj@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 13:41:40 by yanaranj          #+#    #+#             */
-/*   Updated: 2024/02/12 15:47:51 by yanaranj         ###   ########.fr       */
+/*   Updated: 2024/02/22 12:45:56 by yanaranj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,27 +22,65 @@ int is_limits(char *input)
 	error = 0;
 	if (input[0] == '-')
 	{
-		if (ft_strlen(input) < 12)
+		if (ft_strlen(input) < 11)
 			return (0);
 		if (ft_strlen(input) > 11)
-			return (1);
-			//error = 1;
+			error = 1;
 		if (ft_strncmp(input, "-2147483648", 11) > 0)
-			return (1);
-			//error = 1;
+			error = 1;
 	}
 	else
 	{
 		if (ft_strlen(input) < 10)
 			return (0);
 		if (ft_strlen(input) > 10)
-			return (1);
-			//error = 1;
+			error = 1;
 		if (ft_strncmp(input, "2147483647", 10) > 0)
-			return (1);
-			//error = 1;
+			error = 1;
 	}
-	return (0);
+	return (error);
+}
+
+int	is_digit(int error, int i, int j, char **argv)
+{
+	if (error == 0)
+	{
+		while (argv[i][j])
+		{
+			if (!ft_isdigit(argv[i][j++]))
+			{
+				error = 1;
+				break ;
+			}
+		}
+	}
+	return (error);
+}
+
+int check_syntax(int argc, char **argv)
+{
+	int	i;
+	int	j;
+	int error;
+
+	error = 0;
+	i = 1;
+	while (i < argc)
+	{
+		j = 0;
+		if (argv[i][0] == '\0')
+			error = 1;
+		else if (argv[i][0] == '-' || argv[i][0] == '+')
+		{
+			j++;
+			if (argv[i][1] == '\0')
+				error = 1;
+		}
+		if (!error)
+			error = is_digit(error, i, j, argv);
+		i++;
+	}
+	return (error);
 }
 
 int is_dup(int argc, char **argv)
@@ -67,61 +105,17 @@ int is_dup(int argc, char **argv)
 	return (error);
 }
 
-int	is_digit(int error, int i, int j, char **argv)
-{
-	if (error == 0)
-	{
-		while (argv[i][j])
-		{
-			if (!ft_isdigit(argv[i][j]))
-			{
-				error = 1;
-				break ;
-			}
-
-		}
-	}
-	return (error);
-}
-
-int check_syntax(int argc, char **argv)
-{
-	int	i;
-	int	j;
-	int error;
-
-	error = 0;
-	i = 1;
-	while (i < argc)
-	{
-		j = 0;
-		if (argv[i][0] == '\0')
-			error = 1;
-		else if (argv[i][0] == '-' || argv[i][0] == '+')
-		{
-			i++;
-			if (argv[i][1] == '\0')
-				error = 1;
-		}
-		if (error != '\0')
-			error = is_digit(error, i, j, argv);
-		i++;
-	}
-	return (error);
-}
-
-
 int arg_checker(int argc, char **argv)
 {
 	int error;
 	int	i;
 
 	error = 0;
-	if (check_syntax (argc, argv) == 1)
-		error = 1;
-	if (is_dup(argc, argv) == 1)
-		error = 1;
 	i = 1;
+	if (check_syntax (argc, argv))
+		error = 1;
+	if (is_dup(argc, argv))
+		error = 1;
 	while (i < argc)
 	{
 		if (is_limits(argv[i]))
