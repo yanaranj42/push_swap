@@ -6,8 +6,10 @@
 /*   By: yanaranj <yanaranj@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 13:14:18 by yanaranj          #+#    #+#             */
-/*   Updated: 2024/02/23 17:34:32 by yanaranj         ###   ########.fr       */
+/*   Updated: 2024/02/29 16:27:13 by yanaranj         ###   ########.fr       */
 /*                                                                            */
+
+
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H 
@@ -39,13 +41,15 @@ void	assign_index(t_ring *node);
 
 //		--SORT UTILIS--		//
 int		stack_is_sorted(t_stack *a);
-int		ft_lstsize(t_stack *lst);
 void	print_stack(t_stack *a);
+void	free_ptr(t_ring *ptr);
+void	put_top(t_stack *a, int n);
+
 
 //		--SORT STACK__		//
 void	sort_max3(t_stack *a);
-//void	sort_stack(t_stack *a, t_stack *b);
-void	sort_stack(t_stack *a);
+void	small_sort(t_stack *a, t_stack *b);
+void	sort_stack(t_stack *a, t_stack *b);
 
 //		--ARGV CHECKER--		//
 int		arg_checker(int argc, char **argv);
@@ -57,12 +61,15 @@ int		is_limits(char *input);
 //		--LIBFT UTILS--		//
 size_t	ft_strlen(const char *c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
-int	ft_atoi(const char *str);
-int	ft_isdigit(int c);
+int		ft_atoi(const char *str);
+int		ft_isdigit(int c);
+int		ft_lstsize(t_stack *lst);
 
 //		--MOVEMENTS--		//
 void	rotate_a(t_stack *a);
 void	rev_rotate_a(t_stack *a);
 void	swap(t_stack *lst);
+void	push_b(t_stack *a, t_stack *b);
+void	push_a(t_stack *b, t_stack *a);
 
 #endif

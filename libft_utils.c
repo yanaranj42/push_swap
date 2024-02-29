@@ -6,7 +6,7 @@
 /*   By: yanaranj <yanaranj@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:35:01 by yanaranj          #+#    #+#             */
-/*   Updated: 2024/02/22 13:49:47 by yanaranj         ###   ########.fr       */
+/*   Updated: 2024/02/29 16:32:00 by yanaranj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,22 @@ int	ft_atoi(const char *str)
 		str++;
 	}
 	return (nbr * flag);
+}
+
+int	ft_lstsize(t_stack *stack)
+{
+	int		lst_len;
+	t_ring	*lst;
+
+	lst_len = 0;
+	lst = stack->head;
+	if (lst == NULL)
+		return (0);
+	while (lst->next)
+	{
+		lst = lst->next;
+		lst_len++;
+	}
+	stack->len = lst_len + 1;
+	return (lst_len);
 }

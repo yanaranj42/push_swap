@@ -6,7 +6,7 @@
 /*   By: yanaranj <yanaranj@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 13:26:32 by yanaranj          #+#    #+#             */
-/*   Updated: 2024/02/23 17:48:05 by yanaranj         ###   ########.fr       */
+/*   Updated: 2024/02/29 18:38:27 by yanaranj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,7 @@ int main (int argc, char **argv)
 {
 	t_stack	a;
 	t_stack	b;
-	t_ring	*freeptr;
-	t_ring	*tmp;
+	t_ring	*ptr;
 
 	a.head = NULL;
 	b.head = NULL;
@@ -89,18 +88,14 @@ int main (int argc, char **argv)
 		return (0);
 	fill_stack(&a, argc, argv);
 	assign_index(a.head);
-	if(!stack_is_sorted(&a)) //mira si el stack esta ordenado
-		sort_stack(&a);
-		//sort_stack(&a, &b);
+	print_stack(&a); //recibido
+	if(stack_is_sorted(&a))
+		return (0);
 	ft_lstsize(&a);
-//	ft_lstsize(&b);
-	freeptr = a.head;
-	print_stack(&a);
-	while(freeptr)//se puede crear esta funcion en el utils.
-	{
-		tmp = freeptr->next;
-		free(freeptr);
-		freeptr = tmp;
-	}
+	ft_lstsize(&b);
+	sort_stack(&a, &b);
+	ptr = a.head;
+	print_stack(&a); //retornado y ordenado.
+	free_ptr(ptr);
 	return (0);
 }
